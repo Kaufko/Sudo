@@ -1,4 +1,4 @@
-# CMD sudo
+# command prompt elevator - sudo
 
 ## Elevates your command prompt without changing current directory
 
