@@ -1,6 +1,6 @@
 # command prompt elevator - sudo
 
-## Elevates your command prompt without changing current directory
+### Elevates your command prompt without changing current directory
 
 ## Automatic installation
 ### run sudo.msi
