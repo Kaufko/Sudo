@@ -3,7 +3,7 @@
 ### Elevates your command prompt without changing current directory
 
 ### Automatic installation
- run sudo.msi
+1. run sudo.msi
 
 ### Manual installation
 1. download sudo.bat
