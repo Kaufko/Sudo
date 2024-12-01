@@ -2,10 +2,10 @@
 
 ### Elevates your command prompt without changing current directory
 
-## Automatic installation
-### run sudo.msi
+### Automatic installation
+ run sudo.msi
 
-## Manual installation
-### download sudo.bat
-### place in your desired location
-### add folder to path
+### Manual installation
+1. download sudo.bat
+2. place in your desired location
+3. add folder to path
