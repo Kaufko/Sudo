@@ -23,7 +23,6 @@ if "%1" == "test" goto :hasAdmin
     exit /B
 
 :collectArgs
-    echo "%~1"
     shift
     if "%~1"=="" goto :hasArgs
     set args=%args% %~1
