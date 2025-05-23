@@ -1,29 +1,45 @@
 @echo off
+if "%1" == "" (
+    echo No arguments provided
+    echo Usage:
+    
+    echo    sudo /i - elevate cmd
+    echo    sudo ^<command^> - runs command elevated
+    timeout /t 5 > nul
+    goto :eof
+)
 
-set args=
+if "%1" == "executeSingularCommand" (
+    goto collectArgs
+)
+if /I "%1"=="/i" (
+    goto getAdmin
+) else (
+    PowerShell -Command "Start-Process cmd.exe -ArgumentList '/c cd /d \"%CD%\" && \"%~f0\" executeSingularCommand %*' -Verb RunAs"
+)
+:waitloop
+    if exist "%TEMP%\sudo-out.txt" (
+        type "%TEMP%\sudo-out.txt"
+        del /f "%TEMP%\sudo-out.txt"
+        goto :eof
+    ) else (
+        timeout /t 1 /nobreak >nul
+        goto waitloop
+    )
 
-if "%1" == "test" goto :hasAdmin
-
-:getadmin
+:getAdmin
     REM elevates CMD
     ECHO Requesting administrative privileges...
     PING -n 2 127.0.0.1 >NUL
-    PowerShell -Command "Start-Process cmd.exe -ArgumentList '/k cd /d \"%CD%\" && \"%~f0\" test %*' -Verb RunAs"
+    PowerShell -Command "Start-Process cmd.exe -ArgumentList '/k cd /d \"%CD%\"' -Verb RunAs"
     EXIT
 
-:hasAdmin
-    if "%2" == "" goto :noInput
-    if not "%2" == "" goto :collectArgs
-
-:noInput
-    EXIT /B
-
 :hasArgs
-    call %args%
+    call %args% > "%TEMP%\sudo-out.txt"
     exit /B
 
 :collectArgs
     shift
     if "%~1"=="" goto :hasArgs
     set args=%args% %~1
-    goto :collectArgs
+    goto collectArgs
