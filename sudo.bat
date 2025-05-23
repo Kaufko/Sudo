@@ -15,6 +15,9 @@ if "%1" == "executeSingularCommand" (
 if /I "%1"=="/i" (
     goto getAdmin
 ) else (
+    if exist "%TEMP%\sudo-out.txt" (
+        del /f "%TEMP%\sudo-out.txt"
+    )
     PowerShell -Command "Start-Process cmd.exe -ArgumentList '/c cd /d \"%CD%\" && \"%~f0\" executeSingularCommand %*' -Verb RunAs"
 )
 :waitloop
