@@ -11,7 +11,7 @@
 3. Add folder to path
 
 ### Usage
-1. sudo <command> - runs external elevated shell that runs command and prints output to starting shell
+1. sudo &lt;command&gt; - runs external elevated shell that runs command and prints output to starting shell
 2. sudo /i - opens new elevated shell and closes the old one
 
 ### FAQ
